@@ -17,10 +17,6 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 응용프로그램 자체를 식별하는 값 - 실행 파일의 이미지가 로드된 가상 메모리 상의 주소
-                     _In_opt_ HINSTANCE hPrevInstance,  // 먼저 실행된 인스턴스의 핸들, 이 값은 항상 NULL(0)임
-                     _In_ LPWSTR    lpCmdLine,  // 실행 파일의 경로와 명령줄의 내용을 담은 문자열의 포인터, C언어의 argv 파라미터와 유사
-                     _In_ int       nCmdShow)  // 윈도우를 화면에 보여주는 방법을 명시
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -28,12 +24,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 응용프로그램 자체를 
     // TODO: 여기에 코드를 입력합니다.
 
     // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING); // 문자열 테이블을 참조하여 IDS_APP_TITLE(정의된 상수)에 해당하는 문자열을 로딩하여 szTitle 버퍼에 저장
     LoadStringW(hInstance, IDC_HELLOWORLDWIN, szWindowClass, MAX_LOADSTRING);
-    // LoadString() API함수는 문자열 테이블에서 리소스 ID를 기준으로 문자열을 로딩하는 함수
 
-    MyRegisterClass(hInstance);  // 셍성할 윈도우의 기본적인 정보를 담은 구조체를 완성하고 RegisterClassEx() API함수를 호출하여 윈도우 클래스를 등록
- 
     // 애플리케이션 초기화를 수행합니다:
     if (!InitInstance (hInstance, nCmdShow))
     {
@@ -42,12 +34,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, // 응용프로그램 자체를 
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_HELLOWORLDWIN));
 
-    MSG msg;// MSG 구조체 
-	// hwnd멤버 : 메시지를 전달받을 윈도우 핸들
-	// message멤버 : 윈도우 메시지
-	// wParam, IParam멤버 : 윈도우 메시지와 연결된 미시지 파라미터
-	// time멤버 : 메시지가 발생한 시간
-	// pt멤버 : 메시지가 발생한 화면 상의  좌표
 
     // 기본 메시지 루프입니다:
     while (GetMessage(&msg, nullptr, 0, 0))
